@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main(){
+	int i, j, random;
+	int cnt = 0;
+	int ran1_cnt = 0;
+	int ran0_cnt = 1;
+	int a[11][11] = {}; 
+	srand((long)time(NULL));
+	for(i = 0; i < 10; i++){
+		for(j = 0; j < 10; j++){
+			if(ran1_cnt > ran0_cnt){
+			    if(ran1_cnt < 50){
+			        random = rand() % 2; 
+			        printf("%d ", random); 
+			        a[i][j] = random;
+			        if(random == 0) ran0_cnt += 1;
+			        else ran1_cnt += 1;
+			    }
+			    else{
+			        random = 0;
+			        printf("%d ", random);
+			        ran0_cnt += 1;
+			    }
+			}
+			else{
+			    if(ran0_cnt < 51){
+			        random = rand() % 2; 
+			        printf("%d ", random); 
+			        a[i][j] = random; 
+			        if(random == 0) ran0_cnt += 1;
+			        else ran1_cnt += 1;
+			    }
+			    else{
+			        random = 1;
+			        printf("%d ", random);
+			        ran1_cnt += 1;
+			    }
+			}
+		}
+		printf("\n");
+	}
+	printf("\n");
+
+	for(i = 1; i < 9; i++){
+		for(j = 1; j < 9; j++){
+			if(a[i][j] == 1){
+			    if(a[i+1][j] == 1 && a[i-1][j] == 1 && a[i][j+1] == 1 && a[i][j-1] == 1){
+			        cnt++;
+			    }
+			}
+		}
+	}
+	for(i = 1; i < 9; i++){
+		for(j = 1; j < 9; j++){
+			if(a[i][j] == 1){
+			    if(a[i+1][j] == 1 && a[i-1][j] == 1 && a[i][j+1] == 1 && a[i][j-1] == 1){
+			        a[i][j] = 3;
+			    }
+			}
+		}
+	}
+	for(i = 0; i < 10; i++){
+	    for(j = 0; j < 10; j++){
+	        printf("%d ", a[i][j]);
+	    }
+	    printf("\n");
+	}
+    printf("cnt : %d\n", cnt);
+    printf("1의 갯수 : %d\n", ran1_cnt);
+    printf("0의 갯수 : %d", ran0_cnt);
+
+	return 0; 
+}
